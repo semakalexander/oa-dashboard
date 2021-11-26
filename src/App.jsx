@@ -1,4 +1,7 @@
+import cubejs from '@cubejs-client/core'
+import { CubeProvider } from '@cubejs-client/react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import { styled, ThemeProvider } from '@mui/material/styles'
 
 import Dashboard from './pages/Dashboard'
@@ -8,6 +11,8 @@ import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 
 import theme from './theme'
+
+const cubejsApi = cubejs(process.env.REACT_APP_JWT, { apiUrl: `${process.env.REACT_APP_API_URL}/cubejs-api/v1` })
 
 const MainContainer = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -26,18 +31,20 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
-				<MainContainer>
-					<Sidebar />
+				<CubeProvider cubejsApi={cubejsApi}>
+					<MainContainer>
+						<Sidebar />
 
-					<ContentContainer>
-						<Header />
+						<ContentContainer>
+							<Header />
 
-						<Routes>
-							<Route path="/" element={<Home />} />
-							<Route path="/dashboard" element={<Dashboard />} />
-						</Routes>
-					</ContentContainer>
-				</MainContainer>
+							<Routes>
+								<Route path="/" element={<Home />} />
+								<Route path="/dashboard" element={<Dashboard />} />
+							</Routes>
+						</ContentContainer>
+					</MainContainer>
+				</CubeProvider>
 			</ThemeProvider>
 		</BrowserRouter>
 	)
