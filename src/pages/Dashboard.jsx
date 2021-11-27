@@ -13,7 +13,14 @@ import queries from '../graphql/queries'
 
 const Heading = styled(Typography)(({ theme }) => ({ color: theme.palette.background.main }))
 
-const StyledGridContainer = styled(Grid)({ marginTop: 42, paddingRight: 74 })
+const StyledGridContainer = styled(Grid)(({ theme }) => ({
+	marginTop: 28,
+	paddingRight: 30,
+	[theme.breakpoints.up('xl')]: {
+		marginTop: 42,
+		paddingRight: 74,
+	},
+}))
 
 const data = [
 	{ type: 'Revenue', amount: '$9,000K', date: 'Aug 2020', MoM: 21.7 },
@@ -84,12 +91,12 @@ const Dashboard = () => {
 			<StyledGridContainer>
 				<Grid container spacing={2}>
 					{data.map(item => (
-						<Grid item xs={3} key={item.type}>
+						<Grid item xs={12} sm={6} xl={3} key={item.type}>
 							<InfoBlock {...item} />
 						</Grid>
 					))}
 
-					<Grid item xs={6}>
+					<Grid item xs={12} lg={6}>
 						{isGrossMarginLoading || isRevenueLoading ? (
 							<ChartSkeleton />
 						) : (
@@ -115,7 +122,7 @@ const Dashboard = () => {
 						)}
 					</Grid>
 
-					<Grid item xs={6} sx={{ overflow: 'hidden' }}>
+					<Grid item xs={12} lg={6} sx={{ overflow: 'hidden' }}>
 						<TableBlock />
 					</Grid>
 				</Grid>

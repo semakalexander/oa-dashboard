@@ -1,6 +1,15 @@
 import { createTheme } from '@mui/material'
 
 export default createTheme({
+	breakpoints: {
+		values: {
+			xs: 0,
+			sm: 600,
+			md: 900,
+			lg: 1440,
+			xl: 1920,
+		},
+	},
 	fontFamily: 'Roboto',
 	palette: {
 		light: '#fff',
@@ -32,6 +41,7 @@ export default createTheme({
 		},
 	},
 	variables: {
-		sidebarWidth: 280,
+		sidebarWidth: 250,
+		sidebarWidthXl: 280,
 	},
 })

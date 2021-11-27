@@ -10,9 +10,11 @@ import TableCell from '@mui/material/TableCell'
 
 const TableSection = styled('div')(() => ({
 	background: '#fff',
-	borderRadius: '5px',
 	padding: '28px 18px',
 	boxSizing: 'border-box',
+	boxShadow: '0px 2px 12px -6px rgba(0,0,0,0.25)',
+	border: '1px solid rgba(0, 0, 0, 0.1)',
+	borderRadius: '8px',
 }))
 
 const TableHeading = styled(Typography)(({ theme }) => ({
@@ -37,6 +39,11 @@ const StyledTableHeadCell = styled(TableCell)(({ theme }) => ({
 	fontWeight: 600,
 	letterSpacing: '0px',
 	color: theme.palette.text.main,
+	padding: '4px 12px',
+	whiteSpace: 'nowrap',
+	[theme.breakpoints.up('xl')]: {
+		padding: '12px 16px',
+	},
 }))
 
 const StyledTableBodyRow = styled(TableRow)(() => ({ background: '#fff' }))
@@ -46,9 +53,14 @@ const StyledTableBodyCell = styled(TableCell)(({ theme }) => ({
 	letterSpacing: 0,
 	borderBottom: 'none',
 	fontSize: 12,
-	padding: '12px 16px',
 	color: theme.palette.text.main,
 	fontWeight: 600,
+	padding: '4px 12px',
+	whiteSpace: 'nowrap',
+
+	[theme.breakpoints.up('xl')]: {
+		padding: '12px 16px',
+	},
 }))
 
 const tableData = [...new Array(100)].map((_, id) => ({

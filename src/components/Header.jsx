@@ -5,9 +5,12 @@ import Help from '@mui/icons-material/Help'
 import Person from '@mui/icons-material/Person'
 
 const HeaderContainer = styled('div')(({ theme }) => ({
-	padding: '32px 30px 26px',
+	padding: '20px 18px 16px',
 	display: 'flex',
 	justifyContent: 'flex-end',
+	[theme.breakpoints.up('xl')]: {
+		padding: '32px 30px 26px',
+	},
 }))
 
 const IconsContainer = styled('div')(({ theme }) => ({
@@ -15,8 +18,11 @@ const IconsContainer = styled('div')(({ theme }) => ({
 
 	'& svg': {
 		fill: theme.palette.text.main,
-		width: 32,
+		width: 24,
 		height: 'auto',
+		[theme.breakpoints.up('xl')]: {
+			width: 32,
+		},
 
 		'&:not(:first-of-type)': {
 			marginLeft: 12,

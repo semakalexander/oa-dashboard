@@ -11,33 +11,42 @@ const Container = styled(Grid)(({ theme }) => ({
 	background: theme.palette.light,
 	padding: '22px 30px',
 	position: 'relative',
-	boxShadow: '0px 2px 12px -6px rgba(0,0,0,0.25)',
 	borderRadius: '8px',
+	boxShadow: '0px 2px 12px -6px rgba(0,0,0,0.25)',
 	border: '1px solid rgba(0, 0, 0, 0.1)',
 }))
 
 const Type = styled(Typography)(({ theme }) => ({
-	fontSize: 18,
+	fontSize: 16,
 	letterSpacing: '-1px',
 	lineHeight: 1.1,
 	color: theme.palette.text.main,
+	[theme.breakpoints.up('xl')]: {
+		fontSize: 18,
+	},
 }))
 
 const Amount = styled(Typography)(({ theme }) => ({
-	fontSize: 36,
+	fontSize: 30,
 	lineHeight: 1,
 	letterSpacing: '-0.4px',
 	marginTop: 12,
 	fontWeight: 600,
 	color: theme.palette.text.main,
+	[theme.breakpoints.up('xl')]: {
+		fontSize: 36,
+	},
 }))
 
 const Date = styled(Typography)(({ theme }) => ({
-	fontSize: 14,
+	fontSize: 12,
 	lineHeight: 1,
 	letterSpacing: '0px',
 	marginTop: 10,
 	color: theme.palette.text.main,
+	[theme.breakpoints.up('xl')]: {
+		fontSize: 14,
+	},
 }))
 
 const MoMContainer = styled('div')({
@@ -53,13 +62,17 @@ const MoMBadge = styled(Typography, { shouldForwardProp: prop => prop !== 'varia
 	display: 'flex',
 	justifyContent: 'center',
 	alignItems: 'center',
-	fontSize: 18,
+	fontSize: 16,
 	letterSpacing: '-0.5px',
 	lineHeight: 1,
-	padding: '2px 18px 2px 28px',
+	padding: '2px 14px 2px 24px',
 	borderRadius: '16px',
 	color: theme.palette.light,
 	background: theme.palette.badge[variant] || theme.palette.badge.neutral,
+	[theme.breakpoints.up('xl')]: {
+		fontSize: 18,
+		padding: '2px 18px 2px 28px',
+	},
 }))
 
 const MoMText = styled(Typography)(({ theme }) => ({

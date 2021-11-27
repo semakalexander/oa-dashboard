@@ -1,18 +1,14 @@
-import cubejs from '@cubejs-client/core'
-import { CubeProvider } from '@cubejs-client/react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 
-import { styled, ThemeProvider } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
+import MenuIcon from '@mui/icons-material/Menu'
 
 import Dashboard from './pages/Dashboard'
 import Home from './pages/Home'
 
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
-
-import theme from './theme'
-
-const cubejsApi = cubejs(process.env.REACT_APP_JWT, { apiUrl: `${process.env.REACT_APP_API_URL}/cubejs-api/v1` })
 
 const MainContainer = styled('div')(({ theme }) => ({
 	display: 'flex',
@@ -23,30 +19,44 @@ const MainContainer = styled('div')(({ theme }) => ({
 const ContentContainer = styled('div')(({ theme }) => ({
 	display: 'flex',
 	flexDirection: 'column',
-	width: `calc(100% - ${theme.variables.sidebarWidth}px)`,
-	paddingLeft: 70,
+	paddingLeft: 35,
+	width: '100%',
+	boxSizing: 'border-box',
+	[theme.breakpoints.up('md')]: {
+		width: `calc(100% - ${theme.variables.sidebarWidth}px)`,
+	},
+	[theme.breakpoints.up('xl')]: {
+		paddingLeft: 70,
+		width: `calc(100% - ${theme.variables.sidebarWidthXl}px)`,
+	},
+}))
+
+const StyledMenuIcon = styled(MenuIcon)(({ theme }) => ({
+	position: 'absolute',
+	top: 20,
+	left: 35,
+	fill: theme.palette.text.main,
+	cursor: 'pointer',
 }))
 
 const App = () => {
+	const [isSidebarHidden, setIsSidebarHidden] = useState(true)
+
 	return (
-		<BrowserRouter>
-			<ThemeProvider theme={theme}>
-				<CubeProvider cubejsApi={cubejsApi}>
-					<MainContainer>
-						<Sidebar />
+		<MainContainer>
+			<StyledMenuIcon onClick={() => setIsSidebarHidden(false)} />
 
-						<ContentContainer>
-							<Header />
+			<Sidebar isHidden={isSidebarHidden} hide={() => setIsSidebarHidden(true)} />
 
-							<Routes>
-								<Route path="/" element={<Home />} />
-								<Route path="/dashboard" element={<Dashboard />} />
-							</Routes>
-						</ContentContainer>
-					</MainContainer>
-				</CubeProvider>
-			</ThemeProvider>
-		</BrowserRouter>
+			<ContentContainer>
+				<Header />
+
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/dashboard" element={<Dashboard />} />
+				</Routes>
+			</ContentContainer>
+		</MainContainer>
 	)
 }
 

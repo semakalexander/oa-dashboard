@@ -3,15 +3,21 @@ import { styled } from '@mui/material/styles'
 import { Skeleton } from '@mui/material'
 import { random } from '@amcharts/amcharts4/.internal/core/utils/Utils'
 
-const ChartSkeletonContainer = styled('div')({
+const ChartSkeletonContainer = styled('div')(({ theme }) => ({
 	height: 334,
 	background: '#fff',
 	boxSizing: 'border-box',
-	padding: 20,
+	padding: 10,
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'center',
+	[theme.breakpoints.up('sm')]: {
+		padding: 20,
+	},
 	'&:not(:first-of-type)': {
 		marginTop: 16,
 	},
-})
+}))
 
 const TopContainer = styled('div')({
 	display: 'flex',
@@ -19,7 +25,7 @@ const TopContainer = styled('div')({
 	justifyContent: 'space-between',
 })
 
-const ChartContainer = styled('div')({ display: 'flex', flexDirection: 'row' })
+const ChartContainer = styled('div')({ display: 'flex', flexDirection: 'row', marginTop: 30 })
 
 const ChartBackground = styled('div')({
 	position: 'absolute',
@@ -30,33 +36,48 @@ const ChartBackground = styled('div')({
 	background: 'rgba(0,0,0,0.005)',
 })
 
-const Chart = styled('div')({
+const Chart = styled('div')(({ theme }) => ({
 	position: 'relative',
 	display: 'flex',
 	alignItems: 'flex-end',
 	justifyContent: 'space-between',
 	width: '100%',
-	padding: '0 10px 0 25px',
-})
+	padding: 0,
+	'& > span': {
+		width: 16,
+	},
+	[theme.breakpoints.up('sm')]: {
+		padding: '0 10px 0 25px',
+		'& > span': {
+			width: 32,
+		},
+	},
+}))
 
-const YAxisContainer = styled('div')({
-	display: 'flex',
+const YAxisContainer = styled('div')(({ theme }) => ({
+	display: 'none',
 	flexDirection: 'column',
-	'& > span': { marginTop: 30 },
-})
+	'& > span:not(:first-child)': { marginTop: 30 },
+	[theme.breakpoints.up('sm')]: {
+		display: 'flex',
+	},
+}))
 
-const XAxisContainer = styled('div')({
+const XAxisContainer = styled('div')(({ theme }) => ({
 	display: 'flex',
 	flexDirection: 'row',
 	marginTop: 20,
 	justifyContent: 'space-between',
-	padding: '0 10px 0 60px',
-})
+	padding: 0,
+	[theme.breakpoints.up('sm')]: {
+		padding: '0 10px 0 60px',
+	},
+}))
 
 const ChartSkeleton = () => {
 	const yAxisLabels = useMemo(() => [...new Array(5)].map((_, i) => ({ id: i, width: 35, height: 20 })), [])
 	const xAxisLabels = useMemo(() => [...new Array(12)].map((_, i) => ({ id: i, width: 32, height: 14 })), [])
-	const columns = useMemo(() => [...new Array(12)].map((_, i) => ({ id: i, width: 32, height: random(10, 180) })), [])
+	const columns = useMemo(() => [...new Array(12)].map((_, i) => ({ id: i, height: random(10, 180) })), [])
 
 	return (
 		<ChartSkeletonContainer>
@@ -75,7 +96,7 @@ const ChartSkeleton = () => {
 				<Chart>
 					<ChartBackground />
 					{columns.map(({ id, width, height }) => (
-						<Skeleton key={id} variant="rectangular" width={width} height={height} />
+						<Skeleton key={id} variant="rectangular" height={height} />
 					))}
 				</Chart>
 			</ChartContainer>
