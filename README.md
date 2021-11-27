@@ -11,3 +11,7 @@ https://oa-dashboard-test.herokuapp.com/dashboard
 
 You should see next result:
 ![final_result_screenshot](./final_result_screenshot.png)
+
+Also, you can find the code on Github:
+
+https://github.com/semakalexander/oa-dashboard
